@@ -17,8 +17,6 @@
 [VarSet, posh, (bPosh-aPosh)]
  
 [VarSet, size, [IGet,Draw:Draw Size]]
-//[Note, pos]
-//[VarSet, aPos, [MouseVPos]]
 [If, (ABS(pos)+ABS(posh)) > 50 ,
 
 [MVarSet, myTempData, 0, [MouseVPos]]
@@ -27,9 +25,7 @@
 
 [If, ABS(pos) > ABS(posh) ,
 
-//[IFreeze, [ISet,Draw:Draw Size, size+(NEG(pos)*2)+(posh*4)]]
 [IFreeze, [ISet,Draw:Draw Size, size+(NEG(pos)*2)]]
-//[ISet,Draw:Draw Size, size+(NEG(pos)*2)+(posh*4)]
 [Delay, 0.010]
 ,
 [IFreeze, [ISet,Draw:Draw Size, size+(posh*4)]]
@@ -40,8 +36,6 @@
 ]
 ,
 
-//[VarDef, aPos, 1]
-//[VarDef, bPos, 1]
 [Note, "init"]
 
 [MVarSet, myTempData, 0, [MouseVPos]]
@@ -50,10 +44,7 @@
 
 ]
 ]//routine end
-//[Loop, 30,  ]
 [RoutineCall, test]
-//[Delay, 0.05]
-//[RoutineCall, test]
 [Sleep, 1, 
 [Delay, 0.050]
 [Delay, 0.050]
