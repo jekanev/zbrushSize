@@ -1,11 +1,19 @@
 //ZBRUSH MACRO - Recorded in ZBrush version 2021
-[IButton,???,"adjust draw size",
+[ISubPalette,"Macro:DrawSize"]
+[ISlider, "Macro:DrawSize:Draw", 75, 5, 1, 200, "Max change lenght", ]
+[ISlider, "Macro:DrawSize:ScaleH", 4, 1, 1, 20, "scale speed H", ]
+[ISlider, "Macro:DrawSize:ScaleV", 2, 1, 1, 20, "scale speed V", ]
+
+[IButton, "Macro:DrawSize:DrawKey","adjust draw size",
 [IShowActions,0]
 [IConfig,2021]
 
 [RoutineDef, test,
 [If,[MVarDef, myTempData, 2, 0] = -1 ,
 
+[VarSet,Maxl,[IGet,"Macro:DrawSize:Draw"]]
+[VarSet,SpeedH,[IGet,"Macro:DrawSize:ScaleH"]]
+[VarSet,SpeedV,[IGet,"Macro:DrawSize:ScaleV"]]
 
 [VarSet, aPos, [MVarGet, myTempData, 0]]
 [VarSet, aPosh, [MVarGet, myTempData, 1]]
@@ -17,7 +25,7 @@
 [VarSet, posh, (bPosh-aPosh)]
  
 [VarSet, size, [IGet,Draw:Draw Size]]
-[If, (ABS(pos)+ABS(posh)) > 50 ,
+[If, (ABS(pos)+ABS(posh)) > Maxl ,
 
 [MVarSet, myTempData, 0, [MouseVPos]]
 [MVarSet, myTempData, 1, [MouseHPos]]
@@ -25,10 +33,10 @@
 
 [If, ABS(pos) > ABS(posh) ,
 
-[IFreeze, [ISet,Draw:Draw Size, size+(NEG(pos)*2)]]
+[IFreeze, [ISet,Draw:Draw Size, size+(NEG(pos)*SpeedV)]]
 [Delay, 0.010]
 ,
-[IFreeze, [ISet,Draw:Draw Size, size+(posh*4)]]
+[IFreeze, [ISet,Draw:Draw Size, size+(posh*SpeedH)]]
 //[ISet,Draw:Draw Size, size+(NEG(pos)*2)+(posh*4)]
 [Delay, 0.010]
 ]
